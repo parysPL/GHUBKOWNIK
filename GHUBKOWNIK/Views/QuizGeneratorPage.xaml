@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GHUBKOWNIK.Views.QuizGeneratorPage"
+             Title="Quiz Generator">
+    <ScrollView>
+        <VerticalStackLayout Spacing="15" Padding="20">
+            <Label Text="Quiz Question Generator" FontSize="20" HorizontalOptions="Center" />
+
+            <!-- Back Button -->
+            <Button Text="Back to Menu" 
+                    Clicked="OnBackToMenuClicked"
+                    HorizontalOptions="Start"
+                    WidthRequest="120"/>
+
+            <Frame BorderColor="Gray" CornerRadius="10" Padding="15">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="Question Type:" FontAttributes="Bold" />
+                    <Picker x:Name="QuestionTypePicker" Title="Select Question Type">
+                        <Picker.Items>
+                            <x:String>Single Choice</x:String>
+                            <x:String>Multiple Choice</x:String>
+                            <x:String>Text Input</x:String>
+                        </Picker.Items>
+                    </Picker>
+
+                    <Label Text="Question Text:" FontAttributes="Bold" />
+                    <Editor x:Name="QuestionTextEditor" HeightRequest="100" />
+
+                    <Label Text="Images (optional):" FontAttributes="Bold" />
+                    <Button Text="Add Image" Clicked="OnAddImageClicked" />
+                    <CollectionView x:Name="ImagesCollectionView" HeightRequest="100">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Image Source="{Binding .}" HeightRequest="80" WidthRequest="80" />
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+
+                    <!-- Answer Options Section -->
+                    <StackLayout x:Name="AnswerOptionsContainer" IsVisible="False">
+                        <Label Text="Answer Options:" FontAttributes="Bold" />
+                        <Button Text="Add Answer Option" Clicked="OnAddAnswerOptionClicked" />
+
+                        <CollectionView x:Name="AnswerOptionsCollectionView">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Frame BorderColor="LightGray" Padding="10" Margin="0,5">
+                                        <VerticalStackLayout>
+                                            <!-- Text Answer -->
+                                            <Label Text="Answer Text:" FontAttributes="Bold" />
+                                            <Entry Text="{Binding Text}" Placeholder="Enter answer text"/>
+
+                                            <!-- Image Answer -->
+                                            <Label Text="Answer Image (optional):" FontAttributes="Bold" />
+                                            <Button Text="Select Image" 
+                                                    Clicked="OnSelectAnswerImageClicked"
+                                                    CommandParameter="{Binding .}"/>
+                                            <Image Source="{Binding ImagePath}" 
+                                                   HeightRequest="60" 
+                                                   IsVisible="{Binding ImagePath, Converter={StaticResource StringToVisibilityConverter}}" />
+
+                                            <!-- Correct Answer Toggle -->
+                                            <Label Text="Correct Answer:" FontAttributes="Bold" />
+                                            <HorizontalStackLayout>
+                                                <RadioButton IsChecked="{Binding IsCorrect}" 
+                                                            IsVisible="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=IsSingleChoice}" />
+                                                <CheckBox IsChecked="{Binding IsCorrect}" 
+                                                          IsVisible="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=IsMultipleChoice}" />
+                                            </HorizontalStackLayout>
+
+                                            <Button Text="Remove" 
+                                                    Clicked="OnRemoveAnswerOptionClicked" 
+                                                    CommandParameter="{Binding .}" 
+                                                    HorizontalOptions="End"/>
+                                        </VerticalStackLayout>
+                                    </Frame>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </StackLayout>
+
+                    <!-- Text Answer Section -->
+                    <StackLayout x:Name="TextAnswerContainer" IsVisible="False">
+                        <Label Text="Correct Text Answer:" FontAttributes="Bold" />
+                        <Entry x:Name="CorrectTextAnswerEntry" Placeholder="Enter correct answer"/>
+                    </StackLayout>
+
+                    <Label Text="Save Location:" FontAttributes="Bold" />
+                    <Button Text="Select Folder" Clicked="OnSelectFolderClicked" />
+                    <Label x:Name="SelectedFolderLabel" />
+
+                    <Button Text="Generate Question" 
+                            Clicked="OnGenerateQuestionClicked" 
+                            Margin="0,20,0,0" 
+                            BackgroundColor="Green" 
+                            TextColor="White" />
+                </VerticalStackLayout>
+            </Frame>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

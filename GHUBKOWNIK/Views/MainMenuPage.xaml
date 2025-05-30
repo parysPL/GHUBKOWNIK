@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GHUBKOWNIK.Views.MainMenuPage"
+             Title="Main Menu">
+    <VerticalStackLayout Spacing="20" Padding="20">
+        <Label Text="GHUBKOWNIK Quiz App" 
+               FontSize="24" 
+               HorizontalOptions="Center" />
+
+        <Button Text="Quiz Generator" 
+                Clicked="OnQuizGeneratorClicked"
+                HeightRequest="60" />
+
+        <Button Text="Start Quiz" 
+                Clicked="OnStartQuizClicked"
+                HeightRequest="60" />
+    </VerticalStackLayout>
+</ContentPage>

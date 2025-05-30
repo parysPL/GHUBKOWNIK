@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GHUBKOWNIK.Views.QuizPage"
+             Title="Quiz">
+    <ScrollView>
+        <VerticalStackLayout Spacing="20" Padding="20">
+            <!-- Back Button -->
+            <Button Text="Back to Menu" 
+                    Clicked="OnBackToMenuClicked"
+                    HorizontalOptions="Start"
+                    WidthRequest="120"/>
+
+            <Label x:Name="QuestionTextLabel" FontSize="18" />
+
+            <StackLayout x:Name="ImagesStackLayout" 
+                         Orientation="Horizontal" 
+                         Spacing="10" 
+                         HeightRequest="150" 
+                         HorizontalOptions="Center" />
+
+            <!-- Single/Multiple Choice Answers -->
+            <StackLayout x:Name="AnswerOptionsStackLayout" IsVisible="False">
+                <Label Text="Select answer:" FontAttributes="Bold" />
+                <CollectionView x:Name="AnswerOptionsCollectionView">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Frame BorderColor="LightGray" Padding="10" Margin="0,5">
+                                <HorizontalStackLayout Spacing="10">
+                                    <!-- Single Choice -->
+                                    <RadioButton IsChecked="{Binding IsSelected}"
+                                                IsVisible="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=IsSingleChoice}"/>
+
+                                    <!-- Multiple Choice -->
+                                    <CheckBox IsChecked="{Binding IsSelected}"
+                                              IsVisible="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=IsMultipleChoice}"/>
+
+                                    <!-- Answer Content -->
+                                    <VerticalStackLayout>
+                                        <Label Text="{Binding Text}" />
+                                        <Image Source="{Binding ImagePath}" 
+                                               HeightRequest="60" 
+                                               IsVisible="{Binding ImagePath, Converter={StaticResource StringToVisibilityConverter}}" />
+                                    </VerticalStackLayout>
+                                </HorizontalStackLayout>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+                <Button x:Name="SubmitAnswerButton" 
+                        Text="Submit Answer" 
+                        Clicked="OnSubmitAnswerClicked"
+                        Margin="0,20"
+                        IsVisible="False"/>
+            </StackLayout>
+
+            <!-- Text Answer -->
+            <StackLayout x:Name="TextAnswerStackLayout" IsVisible="False">
+                <Label Text="Your answer:" FontAttributes="Bold" />
+                <Entry x:Name="TextAnswerEntry" />
+                <Button Text="Submit" 
+                        Clicked="OnTextAnswerSubmitted" 
+                        Margin="0,10"/>
+            </StackLayout>
+
+            <Button x:Name="NextButton" 
+                    Text="Next Question" 
+                    Clicked="OnNextQuestionClicked" 
+                    IsVisible="False" 
+                    HorizontalOptions="Center" />
+
+            <Label x:Name="FeedbackLabel" 
+                   FontAttributes="Bold" 
+                   HorizontalOptions="Center" />
+
+            <BoxView HeightRequest="1" Color="Gray" Margin="0,20" />
+
+            <Label Text="Progress:" FontAttributes="Bold" />
+            <ProgressBar x:Name="QuizProgressBar" />
+            <Label x:Name="ProgressLabel" HorizontalOptions="Center" />
+
+            <Label Text="Repeat counts:" FontAttributes="Bold" />
+            <CollectionView x:Name="RepeatCountsCollectionView" HeightRequest="100">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Label Text="{Binding .}" />
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

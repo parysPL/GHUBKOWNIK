@@ -1,10 +1,15 @@
-﻿namespace GHUBKOWNIK
+﻿using GHUBKOWNIK.Views;
+
+namespace GHUBKOWNIK;
+
+public partial class AppShell : Shell
 {
-    public partial class AppShell : Shell
+    public AppShell()
     {
-        public AppShell()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
+
+        Routing.RegisterRoute(nameof(QuizGeneratorPage), typeof(QuizGeneratorPage));
+        Routing.RegisterRoute(nameof(QuizPage), typeof(QuizPage));
+        Routing.RegisterRoute(nameof(ResultsPage), typeof(ResultsPage));
     }
 }
