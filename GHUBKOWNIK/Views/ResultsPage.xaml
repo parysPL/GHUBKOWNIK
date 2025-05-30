@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GHUBKOWNIK.Views.ResultsPage"
+             Title="Quiz Results">
+    <ScrollView>
+        <VerticalStackLayout Spacing="20" Padding="20">
+            <Label Text="Quiz Results" FontSize="24" HorizontalOptions="Center" />
+
+            <Frame BorderColor="Gray" CornerRadius="10" Padding="15">
+                <VerticalStackLayout Spacing="10">
+                    <!-- Test Duration -->
+                    <Label Text="{Binding QuizResult.Duration, StringFormat='Test Duration: {0:mm\\:ss}'}" 
+                           FontAttributes="Bold"/>
+
+                    <!-- Score Summary -->
+                    <Label Text="{Binding QuizResult.TotalQuestions, StringFormat='Total Questions: {0}'}" />
+                    <Label Text="{Binding QuizResult.CorrectAnswers, StringFormat='Correct Answers: {0}'}" 
+                           TextColor="Green" />
+                    <Label Text="{Binding QuizResult.IncorrectAnswers, StringFormat='Incorrect Answers: {0}'}" 
+                           TextColor="Red" />
+                    <Label Text="{Binding QuizResult.ScorePercentage, StringFormat='Final Score: {0}%'}" 
+                           FontSize="18" FontAttributes="Bold" />
+
+                    <!-- First-Time Accuracy -->
+                    <BoxView HeightRequest="1" Color="Gray" Margin="0,10"/>
+                    <Label Text="First-Time Accuracy:" FontAttributes="Bold"/>
+                    <Label Text="{Binding QuizResult.FirstTimeCorrect, StringFormat='Correct on first try: {0}/{1}'}" />
+                    <Label Text="{Binding QuizResult.FirstTimeAccuracy, StringFormat='Accuracy: {0}%'}" 
+                           FontAttributes="Italic"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Question Repeat Counts -->
+            <Label Text="Question Performance:" FontAttributes="Bold" />
+            <CollectionView ItemsSource="{Binding QuizResult.QuestionRepeatCounts}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Label Text="{Binding Value, StringFormat='{Key} - needed {0} attempts'}"/>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <Button Text="Back to Main Menu" 
+                    Clicked="OnBackToMainMenuClicked" 
+                    HorizontalOptions="Center" 
+                    Margin="0,20" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
