@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GHUBKOWNIK.GeneratorPage">
+	<ScrollView>
+		<VerticalStackLayout            
+			Padding="30,0"
+            Spacing="25">
+			
+			
+			
+			<Button Text="Wstecz"
+					VerticalOptions="Start"
+					HorizontalOptions="End"
+					Clicked="BackButton_Clicked" />
+			
+			<Label Text="GeneratorPage."
+				   VerticalOptions="Start"
+				   HorizontalOptions="Start" />
+		</VerticalStackLayout>
+	</ScrollView>
+</ContentPage>

@@ -6,9 +6,9 @@
     xmlns:local="clr-namespace:GHUBKOWNIK"
     Title="GHUBKOWNIK">
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+    <ShellContent Title="Strona główna" ContentTemplate="{DataTemplate local:MainPage}" />
+    <ShellContent Title="Test" Route="TestPage" ContentTemplate="{DataTemplate local:TestPage}" />
+    <ShellContent Title="Generator" Route="GeneratorPage" ContentTemplate="{DataTemplate local:GeneratorPage}" />
+    <ShellContent Title="Ustawienia" Route="SettingsPage" ContentTemplate="{DataTemplate local:SettingsPage}" />
 
 </Shell>
